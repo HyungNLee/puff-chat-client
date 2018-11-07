@@ -5,7 +5,6 @@
       <h3><i class="material-icons">message</i>puffChat</h3>
     </div>
 
-
     <div id="user-container">
       <div *ngIf="user">
         <!-- <div id="user-name">Hi, {{currentUser.userName}}</div>
@@ -19,7 +18,7 @@
         <input #newDisplayName type="text" required>
         <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white" (click)="updateDisplayName(newDisplayName.value)">Update
           Name</a>
-        <a (click)="logout()">Log out</a>
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white" (click)="logout()">Log out</a>
       </div>
       <!-- <button id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
           <i class="material-icons">account_circle</i>
@@ -28,14 +27,14 @@
         <!-- <label>Enter Username</label>
           <input type="text" #userNameInput>
           <button type="click" (click)="createUser(userNameInput.value)">Submit</button> -->
-        <div class="sign-in-container">
+        <div class="log-in-container">
           <label for="email">Email: </label>
           <input #email type="text" required>
           <label for="password">Password: </label>
           <input #password type="password" required>
           <button (click)="login(email.value, password.value)">Log in</button>
         </div>
-        <div class="log-in-container">
+        <div class="sign-up-container">
           <label for="newEmail">Email: </label>
           <input #newEmail type="text" required>
           <label for="newPW">Password: </label>
@@ -75,9 +74,10 @@
 
         <form id="message-form" onkeypress="return event.keyCode != 13;" action="#">
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input (keydown.enter)="sendMsg(msgInput.value); msgInput.value =''" class="mdl-textfield__input" type="text" id="message" #msgInput name="" value="" placeholder="Message...">
+            <input (keydown.enter)="sendMsg(msgInput.value); msgInput.value =''" class="mdl-textfield__input" type="text"
+              id="message" #msgInput name="" value="" placeholder="Message...">
           </div>
-`
+          `
 
           <!-- Here comes to button -->
           <a type="click" (click)="sendMsg(msgInput.value); msgInput.value='';" class="mdl-button mdl-js-button mdl-button--raised  mdl-button--colored mdl-js-ripple-effect">
@@ -93,6 +93,23 @@
           </a>
         </form>
 
+        <!-- Emoji Menu -->
+        <div class="dropdown">
+          <img class="emoji-button" src="../../assets/emoji/PuffChat Smiley.png" (click)="emojiMenuShow()" alt="emoji button">
+          <div id="dropdown-content" class="hide">
+            <div class="emoji-select-container" *ngFor="let emoji of emojiIconList">
+              <img class="emoji-select-icon" (click)="sendEmoji(emoji.src)" src={{emoji.src}} alt="Emoji click icon">
+              <div class="emoji-text">
+                {{emoji.name}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="must-signin-snackbar" class="mdl-js-snackbar mdl-snackbar">
+          <div class="mdl-snackbar__text"></div>
+          <button class="mdl-snackbar__action" type="button"></button>
+        </div>
       </div>
     </div>
   </div>

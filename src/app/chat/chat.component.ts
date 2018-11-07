@@ -3,6 +3,7 @@ import { ChatService } from '../chat.service';
 import { User } from '../models/user.model';
 import { AuthenticationService } from '../authentication.service';
 import * as firebase from "firebase";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chat',
@@ -23,7 +24,21 @@ export class ChatComponent implements OnInit {
   getPreviousMessagesSub: any;
   getChatroomListSub: any;
 
-  constructor(private chatService : ChatService, public authService: AuthenticationService) {
+  emojiIconList: any[] = [
+    { src: '../../assets/emoji/PuffChat Smiley.png', name: 'Smiley'},
+    { src: '../../assets/emoji/PuffChat Smiley Wink.png', name: 'Wink'},
+    { src: '../../assets/emoji/PuffChat Smiley Squint.png', name: 'Squint'},
+    { src: '../../assets/emoji/PuffChat Smiley Squint Open.png', name: 'Squint Open'},
+    { src: '../../assets/emoji/PuffChat Smiley Open.png', name: 'Smiley Open'},
+    { src: '../../assets/emoji/PuffChat NongDamKi.png', name: 'NongDamKi!'},
+    { src: '../../assets/emoji/PuffChat Frown.png', name: 'Frown'},
+    { src: '../../assets/emoji/PuffChat Crying.png', name: 'Crying'},
+    { src: '../../assets/emoji/PuffChat Blushing.png', name: 'Blushing'},
+    { src: '../../assets/emoji/PuffChat Bemused.png', name: 'Bemused'},
+    { src: '../../assets/emoji/PuffChat Kenneth.png', name: 'Kenneth'}
+  ];
+  
+  constructor(private chatService : ChatService, public authService: AuthenticationService, private router: Router) {
     this.authService.user.subscribe(user => {
       console.log(user);
       if (user == null) {
@@ -49,6 +64,10 @@ export class ChatComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+    if (confirm('Successfully logged out')) {
+      this.router.navigate([""]);
+    }
+    location.reload();
   }
 
   updateDisplayName(newName) {
@@ -136,4 +155,14 @@ export class ChatComponent implements OnInit {
   // createUser(name: string) {
   //   this.currentUser = new User(name);
   // }
+
+  emojiMenuShow() {
+    document.getElementById("dropdown-content").classList.toggle("hide");
+    document.getElementById("dropdown-content").classList.toggle("emoji-grid");
+  }
+
+  sendEmoji(emojiSrc) {
+    this.sendImg(emojiSrc);
+    this.emojiMenuShow();
+  }
 }
