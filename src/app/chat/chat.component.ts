@@ -73,6 +73,7 @@ export class ChatComponent implements OnInit {
   }
 
   updateDisplayName(newName) {
+    this.chatService.escapeChatroom(this.selectedChatroom, this.userName, newName);
     this.authService.updateDisplayName(newName);
   }
 
