@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 import { AppComponent } from './app.component';
@@ -11,6 +12,7 @@ import { masterFirebaseConfig } from './api-keys';
 import { HomeComponent } from './home/home.component';
 
 import { routing } from './app.routing';
+
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -30,6 +32,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     SocketIoModule.forRoot(config),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,

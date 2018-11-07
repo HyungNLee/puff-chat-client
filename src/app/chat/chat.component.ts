@@ -18,7 +18,11 @@ export class ChatComponent implements OnInit {
   user;
   userName: string;
   regex = /(THIS_IS_IMAGE)/i;
-  chatroomIndex: number = 0;
+  chatroomList: object[] = [];
+  selectedChatroom: string = "chatroom-0";
+  getMessageSub: any;
+  getPreviousMessagesSub: any;
+  getChatroomListSub: any;
 
   emojiIconList: any[] = [
     { src: '../../assets/emoji/PuffChat Smiley.png', name: 'Smiley'},
@@ -75,27 +79,34 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.chatService
+    this.getMessageSub = this.chatService
     .getMessage()
     .subscribe(msg => {
-      if (msg.chatroomIndex === this.chatroomIndex) {
+      if (msg.selectedChatroom === this.selectedChatroom) {
         this.messages.push({username: msg.username, msg: msg.msg, timestamp: msg.timestamp });
       }
     });
     
-    this.chatService.requestPreviousMessages(this.chatroomIndex);
+    this.chatService.requestPreviousMessages(this.selectedChatroom);
+    this.chatService.requestChatroomsList();
 
-    this.chatService
+    this.getPreviousMessagesSub = this.chatService
     .getPreviousMessages()
     .subscribe(previousMessages => {
       Object.keys(previousMessages).forEach(key => {
         this.messages.push(previousMessages[key]);
-      }); 
+      });
+    });
+    
+    this.getChatroomListSub = this.chatService
+    .getChatroomsList()
+    .subscribe(list => {
+      this.chatroomList = list;
     });
   }
 
   sendMsg(msg){
-    this.chatService.sendMessage(this.userName, msg, this.chatroomIndex);
+    this.chatService.sendMessage(this.userName, msg, this.selectedChatroom);
   }
 
   sendImg(url) {
@@ -106,6 +117,39 @@ export class ChatComponent implements OnInit {
       e.preventDefault();
       e.returnValue = '';
     })
+  }
+
+  changeChatroom() {
+    this.getMessageSub.unsubscribe();
+    this.getPreviousMessagesSub.unsubscribe();
+    this.getChatroomListSub.unsubscribe();
+
+    this.messages=[{username: "Ethan Lee", msg: "Hello, welcome to the chatroom", timestamp: Date.now()}];
+
+    this.getMessageSub = this.chatService
+    .getMessage()
+    .subscribe(msg => {
+      if (msg.selectedChatroom === this.selectedChatroom) {
+        this.messages.push({username: msg.username, msg: msg.msg, timestamp: msg.timestamp });
+      }
+    });
+    
+    this.chatService.requestPreviousMessages(this.selectedChatroom);
+    this.chatService.requestChatroomsList();
+
+    this.getPreviousMessagesSub = this.chatService
+    .getPreviousMessages()
+    .subscribe(previousMessages => {
+      Object.keys(previousMessages).forEach(key => {
+        this.messages.push(previousMessages[key]);
+      });
+    });
+    
+    this.getChatroomListSub = this.chatService
+    .getChatroomsList()
+    .subscribe(list => {
+      this.chatroomList = list;
+    });
   }
 
   // createUser(name: string) {

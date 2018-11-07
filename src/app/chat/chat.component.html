@@ -133,3 +133,9 @@
     </div>
   </div>
 </main>
+
+<div>
+  <select [(ngModel)]="selectedChatroom" (ngModelChange)="changeChatroom()" name="selectedChatroom">
+    <option *ngFor="let chatroom of chatroomList" [value]="chatroom.id">{{chatroom.title}}</option>
+  </select>
+</div>
