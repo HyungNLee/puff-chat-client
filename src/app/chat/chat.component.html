@@ -6,41 +6,59 @@
     </div>
 
     <div id="user-container">
-      <div *ngIf="user">
+      <div class="mdl-grid float-right user-container__nav" *ngIf="user">
         <!-- <div id="user-name">Hi, {{currentUser.userName}}</div>
           <button id="sign-out" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
             Sign-out
           </button> -->
-        <div id="user-name">
-          <p>Display Name: {{userName}}</p>
+        <div class="mdl-cell--4-col" id="user-name">
+          <p>Hello, {{userName}}</p>
         </div>
-        <label for="newDisplayName">New Display Name: </label>
-        <input #newDisplayName type="text" required>
-        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white" (click)="updateDisplayName(newDisplayName.value)">Update
-          Name</a>
-        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white" (click)="logout()">Log out</a>
+        <div class="mdl-cell--4-col">
+          <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white" (click)="logout()">Log out</a>
+        </div>
+
+        
+        <div class="mdl-cell--4-col" >
+          <div *ngIf="!isEditExpanded">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect button mdl-button--accent mdl-color-text--white" (click)="isEditExpanded=!isEditExpanded">Update Name</a>
+        </div>
+
+          <div *ngIf="isEditExpanded">
+            <input #newDisplayName required type="text" placeholder="New Name">
+
+            <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white" (click)="updateDisplayName(newDisplayName.value);isEditExpanded=!isEditExpanded">Update
+                Name</a>
+          </div>
+          </div>
+  
+
+        
+
+
       </div>
       <!-- <button id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
           <i class="material-icons">account_circle</i>
         </button> -->
       <div *ngIf="!user">
+        <p><a routerLink="/">Please Log in</a></p>
         <!-- <label>Enter Username</label>
           <input type="text" #userNameInput>
           <button type="click" (click)="createUser(userNameInput.value)">Submit</button> -->
-        <div class="log-in-container">
+        <!-- <div class="log-in-container">
           <label for="email">Email: </label>
           <input #email type="text" required>
           <label for="password">Password: </label>
           <input #password type="password" required>
           <button (click)="login(email.value, password.value)">Log in</button>
-        </div>
-        <div class="sign-up-container">
+        </div> -->
+        <!-- <div class="sign-up-container">
           <label for="newEmail">Email: </label>
           <input #newEmail type="text" required>
           <label for="newPW">Password: </label>
           <input #newPW type="password" required>
           <button (click)="createAccount(newEmail.value, newPW.value)">Sign Up</button>
-        </div>
+        </div> -->
       </div>
 
     </div>
@@ -79,32 +97,33 @@
           </div>
           `
 
-          <!-- Here comes to button -->
+          <!-- Here comes the buttons -->
           <a type="click" (click)="sendMsg(msgInput.value); msgInput.value='';" class="mdl-button mdl-js-button mdl-button--raised  mdl-button--colored mdl-js-ripple-effect">
             Send
           </a>
         </form>
 
-        <form id="image-form" action="#">
-          <!-- <input #imageInput id="mediaCapture" type="file" accept="image/*" capture="camera"> -->
-          <a (click)="sendImg(msgInput.value); msgInput.value ='' " type="click" id="submitImage" title="Add an image"
-            class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--amber-400 mdl-color-text--white">
-            <i class="material-icons">image</i>
-          </a>
-        </form>
-
         <!-- Emoji Menu -->
         <div class="dropdown">
-          <img class="emoji-button" src="../../assets/emoji/PuffChat Smiley.png" (click)="emojiMenuShow()" alt="emoji button">
+          <a><img class="emoji-button" src="../../assets/emoji/PuffChat Smiley.png" (click)="emojiMenuShow()" alt="emoji button"></a>
           <div id="dropdown-content" class="hide">
             <div class="emoji-select-container" *ngFor="let emoji of emojiIconList">
-              <img class="emoji-select-icon" (click)="sendEmoji(emoji.src)" src={{emoji.src}} alt="Emoji click icon">
+              <a><img class="emoji-select-icon" (click)="sendEmoji(emoji.src)" src={{emoji.src}} alt="Emoji click icon"></a>
               <div class="emoji-text">
                 {{emoji.name}}
               </div>
             </div>
           </div>
         </div>
+
+        <form id="image-form" action="#">
+          <a (click)="sendImg(msgInput.value); msgInput.value ='' " type="click" id="submitImage" title="Add an image"
+            class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--amber-400 mdl-color-text--white">
+            <i class="material-icons">image</i>
+          </a>
+        </form>
+
+
 
         <div id="must-signin-snackbar" class="mdl-js-snackbar mdl-snackbar">
           <div class="mdl-snackbar__text"></div>

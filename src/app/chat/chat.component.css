@@ -32,6 +32,7 @@
   #messages-card {
     margin-top: 15px;
   }
+  
 
   /* Header Stick to left top */
   .mdl-layout__header-row span {
@@ -123,11 +124,15 @@
     flex-direction: row;
     width: 48px;
     float: right;
+    margin-left: -3px;
+  }
+  #message-form {
+    width: 90%;
   }
   #message-form .mdl-textfield {
     width: calc(100% - 100px);
   }
-  #message-form a, #image-form a {
+  #message-form a, #image-form a, .dropdown a{
     width: 30px;
     margin: 15px 0 0 10px;
     padding: 0;
@@ -146,7 +151,6 @@
     display: flex;
     flex-direction: row;
     top: 22px;
-    width: 100%;
     right: 0;
     padding-left: 10px;
     justify-content: flex-end;
@@ -242,9 +246,12 @@
   img.img__element {
     max-width: 300px;
     height:auto;
+    border-radius: 10px;
   }
 
   .dropdown {
+    top: 13px;
+    /* margin-bottom:  */
     position: relative;
     display: inline-block;
 }
@@ -287,4 +294,16 @@
 
 .emoji-text {
   text-align: center;
+}
+
+/* .user-container__nav {
+  width: 150px;
+}
+
+.user-container__nav a{
+  width: 150px;
+} */
+
+#user-name{
+  margin-top: 6px;
 }
