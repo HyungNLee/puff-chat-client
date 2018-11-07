@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from './authentication.service';
-// import * as firebase from "firebase";
+import { Router } from '@angular/router';
+import * as firebase from "firebase";
 
 @Component({
   selector: 'app-root',
@@ -14,16 +15,13 @@ export class AppComponent {
   // user;
   // userName: string;
 
-  // constructor(public authService: AuthenticationService) {
-  //   this.authService.user.subscribe(user => {
-  //     console.log(user);
-  //     if (user == null) {
-        
-  //     } else {
-  //       this.userName = user.displayName;
-  //     }
-  //   });
-  // }
+  constructor(public authService: AuthenticationService, private router: Router) {
+    this.authService.user.subscribe(user => {
+      if (user != null) {
+        this.router.navigate(['/chat']);
+      }
+    });
+  }
 
   // ngDoCheck() {
   //   this.user = firebase.auth().currentUser;
