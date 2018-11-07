@@ -42,7 +42,7 @@ export class ChatComponent implements OnInit {
     this.authService.user.subscribe(user => {
       console.log(user);
       if (user == null) {
-        
+        this.router.navigate(['']);
       } else {
         this.userName = user.displayName;
       }
