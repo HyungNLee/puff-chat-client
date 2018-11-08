@@ -35,14 +35,16 @@ export class ChatComponent implements OnInit {
     { src: '../../assets/emoji/PuffChat Crying.png', name: 'Crying'},
     { src: '../../assets/emoji/PuffChat Blushing.png', name: 'Blushing'},
     { src: '../../assets/emoji/PuffChat Bemused.png', name: 'Bemused'},
-    { src: '../../assets/emoji/PuffChat Kenneth.png', name: 'Kenneth'}
+    { src: '../../assets/emoji/PuffChat Kenneth.png', name: 'Kenneth'},
+    { src: '../../assets/emoji/PuffChat Smirk.png', name: 'Smirk'},
+    { src: '../../assets/emoji/PuffChat Shocked Emoticon.png', name: 'Shocked'}
   ];
   
   constructor(private chatService : ChatService, public authService: AuthenticationService, private router: Router) {
     this.authService.user.subscribe(user => {
       console.log(user);
       if (user == null) {
-        
+        this.router.navigate(['']);
       } else {
         this.userName = user.displayName;
       }
@@ -71,6 +73,7 @@ export class ChatComponent implements OnInit {
   }
 
   updateDisplayName(newName) {
+    this.chatService.escapeChatroom(this.selectedChatroom, this.userName, newName);
     this.authService.updateDisplayName(newName);
   }
 

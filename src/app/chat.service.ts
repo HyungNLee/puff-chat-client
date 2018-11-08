@@ -33,4 +33,8 @@ export class ChatService {
   getChatroomsList() {
     return this.socket.fromEvent<any>("chatroomsList");
   }
+
+  escapeChatroom(selectedChatroom, checkoutUsername, newName) {
+    this.socket.emit("checkout", { selectedChatroom: selectedChatroom, checkoutUsername: checkoutUsername, checkinUsername: newName})
+  }
 }
