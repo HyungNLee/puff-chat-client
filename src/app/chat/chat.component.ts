@@ -159,6 +159,10 @@ export class ChatComponent implements OnInit, DoCheck {
   }
 
   changeChatroom(chatroomId) {
+    this.chatroomList.forEach(chatroom => {
+      this.chatService.getMemberCountRequest(chatroom.id);
+    });
+    
     this.selectedChatroom = chatroomId;
     this.getMessageSub.unsubscribe();
     this.getPreviousMessagesSub.unsubscribe();
