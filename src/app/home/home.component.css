@@ -53,3 +53,7 @@ main.mdl-layout__content{
     justify-content:flex-end;
     right: 2%;
 }
+
+.height-fix {
+  height: 100vh;
+}
