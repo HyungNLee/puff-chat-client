@@ -1,6 +1,5 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { ChatService } from '../chat.service';
-import { User } from '../models/user.model';
 import { AuthenticationService } from '../authentication.service';
 import * as firebase from "firebase";
 import { Router } from '@angular/router';
@@ -13,8 +12,8 @@ import { AnonymousSubject } from 'rxjs-compat';
   providers: [ChatService, AuthenticationService]
 })
 export class ChatComponent implements OnInit, DoCheck {
-  messages = [{ username: "Ethan Lee", msg: "Hello, welcome to the chatroom", timestamp: Date.now() }];
-  msg: string;
+  messages=[{username: "Ethan Lee", msg: "Hello, welcome to the chatroom", timestamp: Date.now(), uid: "default"}];
+  msg : string;
   // currentUser: User;
   user;
   userName: string;
@@ -60,6 +59,7 @@ export class ChatComponent implements OnInit, DoCheck {
     } else {
       if (this.user.displayName) {
         this.userName = this.user.displayName;
+        this.chatService.checkin(this.selectedChatroom, this.userName, this.user.uid);
       } else {
         this.userName = "Anonymous Puffster";
       }
@@ -71,7 +71,6 @@ export class ChatComponent implements OnInit, DoCheck {
   }
 
   logout() {
-    this.chatService.logout(this.selectedChatroom, this.userName);
     this.authService.logout();
     if (confirm('Successfully logged out')) {
       this.router.navigate([""]);
@@ -81,8 +80,14 @@ export class ChatComponent implements OnInit, DoCheck {
 
   updateDisplayName(newName) {
     if (newName) {
-      this.chatService.escapeChatroom(this.selectedChatroom, this.userName, newName);
+      this.chatService.updateUsername(this.selectedChatroom, this.user.uid, this.user.displayName, newName);
       this.authService.updateDisplayName(newName);
+      this.messages = this.messages.map(message => {
+        if (message.uid === this.user.uid) {
+          message.username = newName;
+        }
+        return message;
+      });
     } else {
       alert("Please enter a valid user name.");
     }
@@ -98,7 +103,7 @@ export class ChatComponent implements OnInit, DoCheck {
       .getMessage()
       .subscribe(msg => {
         if (msg.selectedChatroom === this.selectedChatroom) {
-          this.messages.push({ username: msg.username, msg: msg.msg, timestamp: msg.timestamp });
+          this.messages.push({ username: msg.username, msg: msg.msg, timestamp: msg.timestamp, uid: (msg.uid === undefined) ? "default":msg.uid });
         }
         
         setTimeout(() => {
@@ -126,7 +131,7 @@ export class ChatComponent implements OnInit, DoCheck {
 
   sendMsg(msg) {
     if (msg) {
-      this.chatService.sendMessage(this.userName, msg, this.selectedChatroom);
+      this.chatService.sendMessage(this.userName, msg, this.selectedChatroom, this.user.uid);
     } else {
       alert("Please enter a valid message.");
     }
@@ -149,13 +154,13 @@ export class ChatComponent implements OnInit, DoCheck {
     this.getPreviousMessagesSub.unsubscribe();
     this.getChatroomListSub.unsubscribe();
 
-    this.messages = [{ username: "Ethan Lee", msg: "Hello, welcome to the chatroom", timestamp: Date.now() }];
+    this.messages = [{ username: "Ethan Lee", msg: "Hello, welcome to the chatroom", timestamp: Date.now(), uid: "default" }];
 
     this.getMessageSub = this.chatService
       .getMessage()
       .subscribe(msg => {
         if (msg.selectedChatroom === this.selectedChatroom) {
-          this.messages.push({ username: msg.username, msg: msg.msg, timestamp: msg.timestamp });
+          this.messages.push({ username: msg.username, msg: msg.msg, timestamp: msg.timestamp, uid: msg.uid });
         }
       });
 
