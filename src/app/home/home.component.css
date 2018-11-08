@@ -21,17 +21,17 @@ main.mdl-layout__content{
   }
 
   .mdl-layout.form-group {
-      margin-top: 6%;
+      margin-top: 2%;
       height: 800px;
 	align-items: center;
   justify-content: center;
 }
 
-footer.mdl-mini-footer {
+/* footer.mdl-mini-footer {
     margin-top: 830px;
     padding: 20px;
     margin-bottom:0;
-}
+} */
 .mdl-layout {
     height: auto;
 }
@@ -43,3 +43,13 @@ footer.mdl-mini-footer {
 	padding: 24px;
 	flex: none;
 } */
+
+.mdl-grid {
+    /* margin: 0; */
+    width: 60%;
+}
+
+.main-column{
+    justify-content:flex-end;
+    right: 2%;
+}
