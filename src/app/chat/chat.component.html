@@ -50,7 +50,10 @@
 <div class="mdl-layout__drawer">
   <span class="mdl-layout-title">Chatrooms</span>
   <nav class="mdl-navigation">
-    <div (click)="changeChatroom(chatroom.id)" *ngFor="let chatroom of chatroomList" class="mdl-navigation__link" [class.active]="selectedChatroom === chatroom.id">{{ chatroom.title }} Members: {{chatroom.memberCount}} people</div>
+    <div (click)="changeChatroom(chatroom.id)" *ngFor="let chatroom of chatroomList" class="mdl-navigation__link" [class.active]="selectedChatroom === chatroom.id">{{ chatroom.title }}
+        <!-- Number badge -->
+      <span class="badge-element" style="color: white; background-color: pink;">{{ chatroom.memberCount }} </span>
+    </div>
   </nav>
 </div>
 

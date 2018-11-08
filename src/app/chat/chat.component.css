@@ -378,3 +378,16 @@ div.input-row {
   height: auto;
   padding: 3%;
 }
+
+.badge-element {
+  text-align: center;
+  float: right;
+  color: white;
+  background-color: #e388d9;
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  margin: 0;
+  border-radius: 8px;
+  margin-top: -2px;
+}
