@@ -75,6 +75,11 @@
           <!-- Ngfor loop will be located here -->
           <div *ngFor="let message of messages" id="message-filler">
 
+            <div *ngIf="message.username != userName" class="initial-box">
+              <h3>{{message.username[0].toUpperCase()}}</h3>
+            </div>
+
+
             <span [class.float-right]="message.username == userName">({{message.username}}, {{ message.timestamp
               |date:'medium' }})</span><br />
 
@@ -93,7 +98,7 @@
         <form id="message-form" onkeypress="return event.keyCode != 13;" action="#">
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input (keydown.enter)="sendMsg(msgInput.value); msgInput.value =''" class="mdl-textfield__input" type="text"
-              id="message" #msgInput name="" value="" placeholder="Message...">
+              id="message" #msgInput name="" value="" placeholder="Message..." required>
           </div>
           `
 
