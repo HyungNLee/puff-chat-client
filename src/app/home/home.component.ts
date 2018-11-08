@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
+  startChat: boolean = false;
+
   constructor(private chatService : ChatService, public authService: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
@@ -42,6 +44,10 @@ export class HomeComponent implements OnInit {
     if (confirm('Successfully signed up')) {
       this.router.navigate([""]);
     } 
+  }
+
+  startChatting() {
+    this.startChat = true;
   }
 
 }

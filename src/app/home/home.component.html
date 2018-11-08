@@ -17,7 +17,20 @@
       <a class="mdl-navigation__link" href="">Link</a>
     </nav>
   </div>
-  <main class="mdl-layout__content">
+
+  <div *ngIf="!startChat" class="welcome-info">
+    <h2>Welcome To puffChat!</h2>
+    <img src="../../assets/emoji/PuffChat Chan.png">
+    <div id="welcome-info-textbox">
+      <p>My name is Chan. As CEO of puffChat, I want to personally welcome you to start chatting with us. We
+        strive to make your experience as convenient and awesome as possible! Please check out our features and let's
+        start chatting!</p>
+    </div>
+    <button class="mdl-button mdl-js-button mdl-button--raised" (click)="startChatting()">Start Chatting!</button>
+  </div>
+
+
+  <main *ngIf="startChat" class="mdl-layout__content">
 
     <div class="mdl-layout form-group mdl-js-layout mdl-color--primary-100">
       <div class="gif-container">
