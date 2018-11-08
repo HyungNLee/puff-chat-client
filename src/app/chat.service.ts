@@ -45,4 +45,12 @@ export class ChatService {
   checkin(selectedChatroom, checkinUsername, checkinUID) {
     this.socket.emit("checkin", { selectedChatroom: selectedChatroom, checkinUsername: checkinUsername, checkinUID: checkinUID });    
   }
+
+  getMemberCountRequest(chatroomId) {
+    this.socket.emit("getMemberCount", chatroomId);
+  }
+
+  getMemberCount() {
+    return this.socket.fromEvent<any>("getMemberCount");
+  }
 }

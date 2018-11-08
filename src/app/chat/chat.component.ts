@@ -19,7 +19,7 @@ export class ChatComponent implements OnInit, DoCheck {
   userName: string;
   userId: string;
   regex = /(THIS_IS_IMAGE)/i;
-  chatroomList: object[] = [];
+  chatroomList: any[] = [];
   selectedChatroom: string = "chatroom-0";
   getMessageSub: any;
   getPreviousMessagesSub: any;
@@ -125,11 +125,17 @@ export class ChatComponent implements OnInit, DoCheck {
         });
       });
 
-    this.getChatroomListSub = this.chatService
-      .getChatroomsList()
-      .subscribe(list => {
-        this.chatroomList = list;
+    this.getChatroomListSub = this.chatService.getChatroomsList().subscribe(list => {
+      this.chatroomList = list;
+      this.chatroomList.forEach(chatroom => {
+        this.chatService.getMemberCountRequest(chatroom.id);
       });
+      this.chatService.getMemberCount().subscribe(msg => {
+        this.chatroomList.find(function(chatroom) {
+          return (chatroom.id === msg.chatroomId);
+        }).memberCount = msg.memberCount;
+      });
+    });
   }
 
   sendMsg(msg) {
