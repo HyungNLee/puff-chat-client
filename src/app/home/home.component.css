@@ -93,7 +93,7 @@ main.mdl-layout__content{
 @keyframes chan-move {
   0%   {left: 0%;}
   25% {left: 25%;}
-  50% {left: 0%;}
+  
   75% {left: -25%;}
   100% {left: 0%;}
 }
