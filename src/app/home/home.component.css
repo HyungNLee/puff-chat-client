@@ -83,3 +83,18 @@ main.mdl-layout__content{
   margin: 15px;
 }
 
+.chan-emoji {
+  position: relative;
+  /* animation-name: chan-move;
+  animation-duration: 2s infinite; */
+  animation: chan-move 4s infinite;
+}
+
+@keyframes chan-move {
+  0%   {left: 0%;}
+  25% {left: 25%;}
+  50% {left: 0%;}
+  75% {left: -25%;}
+  100% {left: 0%;}
+}
+
