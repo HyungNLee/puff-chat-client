@@ -68,15 +68,15 @@
           <!-- Ngfor loop will be located here -->
           <div *ngFor="let message of messages" id="message-filler">
 
-            <div *ngIf="message.username != userName" class="initial-box">
+            <div *ngIf="message.uid != userId" class="initial-box">
               <h3>{{message.username[0].toUpperCase()}}</h3>
             </div>
 
 
-            <span [class.float-right]="message.username == userName">({{message.username}}, {{ message.timestamp
+            <span [class.float-right]="message.uid == userId">({{message.username}}, {{ message.timestamp
               |date:'medium' }})</span><br />
 
-            <div [class.me]="message.username != userName" [class.mdl-cell--3-offset]="message.username == userName"
+            <div [class.me]="message.uid != userId" [class.mdl-cell--3-offset]="message.uid == userId"
               class="chat-bubble">
               <div *ngIf="regex.test(message.msg); else textMessage">
                 <img class="img__element" [src]="message.msg.replace('THIS_IS_IMAGE', '')">
