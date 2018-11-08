@@ -4,6 +4,7 @@ import { User } from '../models/user.model';
 import { AuthenticationService } from '../authentication.service';
 import * as firebase from "firebase";
 import { Router } from '@angular/router';
+import { AnonymousSubject } from 'rxjs-compat';
 
 @Component({
   selector: 'app-chat',
@@ -23,6 +24,7 @@ export class ChatComponent implements OnInit, DoCheck {
   getMessageSub: any;
   getPreviousMessagesSub: any;
   getChatroomListSub: any;
+  
 
   emojiIconList: any[] = [
     { src: '../../assets/emoji/PuffChat Smiley.png', name: 'Smiley' },
@@ -56,7 +58,11 @@ export class ChatComponent implements OnInit, DoCheck {
     if (this.user == null) {
 
     } else {
-      this.userName = this.user.displayName;
+      if(this.user.displayName){
+        this.userName = this.user.displayName;
+      } else {
+        this.userName = "Anonymous Puffster";
+      }
     }
   }
 
