@@ -1,8 +1,11 @@
+<div class="mdl-layout mdl-js-layout">
 <!-- Header section containing logo -->
 <header class="mdl-layout__header mdl-color-text--white mdl-color--indigo-pink-700">
   <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
     <div class="mdl-layout__header-row mdl-cell mdl-cell--12-col mdl-cell--6-col-tablet mdl-cell--12-col-desktop">
-      <h3><i class="material-icons">message</i>puffChat</h3>
+      <div class="margin-left-50">
+        <h3><i class="material-icons">message</i>puffChat</h3>
+      </div>
     </div>
 
     <div id="user-container">
@@ -35,33 +38,23 @@
 
 
       </div>
-      <!-- <button id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
-          <i class="material-icons">account_circle</i>
-        </button> -->
       <div *ngIf="!user">
         <p><a routerLink="/">Please Log in</a></p>
-        <!-- <label>Enter Username</label>
-          <input type="text" #userNameInput>
-          <button type="click" (click)="createUser(userNameInput.value)">Submit</button> -->
-        <!-- <div class="log-in-container">
-          <label for="email">Email: </label>
-          <input #email type="text" required>
-          <label for="password">Password: </label>
-          <input #password type="password" required>
-          <button (click)="login(email.value, password.value)">Log in</button>
-        </div> -->
-        <!-- <div class="sign-up-container">
-          <label for="newEmail">Email: </label>
-          <input #newEmail type="text" required>
-          <label for="newPW">Password: </label>
-          <input #newPW type="password" required>
-          <button (click)="createAccount(newEmail.value, newPW.value)">Sign Up</button>
-        </div> -->
       </div>
 
     </div>
   </div>
 </header>
+<!-- Drawer is here -->
+<div class="mdl-layout__drawer">
+  <span class="mdl-layout-title">Title</span>
+  <nav class="mdl-navigation">
+    <a class="mdl-navigation__link" href="">Link</a>
+    <a class="mdl-navigation__link" href="">Link</a>
+    <a class="mdl-navigation__link" href="">Link</a>
+    <a class="mdl-navigation__link" href="">Link</a>
+  </nav>
+</div>
 
 <main *ngIf="user" class="mdl-layout__content mdl-color--grey-100">
   <div id="messages-card-container" class="mdl-cell mdl-cell--12-col mdl-grid">
@@ -170,4 +163,5 @@
   <select [(ngModel)]="selectedChatroom" (ngModelChange)="changeChatroom()" name="selectedChatroom">
     <option *ngFor="let chatroom of chatroomList" [value]="chatroom.id">{{chatroom.title}}</option>
   </select>
+</div>
 </div>
