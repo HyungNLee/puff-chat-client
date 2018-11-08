@@ -1,27 +1,54 @@
-# PuffChat
+# Puff Chat
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.3.
+#### By Hyewon Cho, Chan Lee, Victoria Oh, and Hyung Lee
+##### 11/08/2018
 
-## Development server
+# Description
+* PuffChat is a chatting app using Socket.io, Angular and Firebase. The user can connect with other users with Puffchat to share messages, pictures and emojis.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+# Layout of the page
+* There will be a header component with the top navbar, logo, search bar, and the login button.
+* Under that will be a component with a list of links to common genres of books that users typically visit.
+* The carousel component with images and links to featured sales or preorder specials
+* Under the carousel are three rows that hold three featured items in each row
+* A horizontal scrolling list component that house Barnes and Noble exclusive books.
+    * Each of these exclusive books will be a 'exclusive-book' component.
+* Footer component with links to various services, help, and 'about us' pages.
 
-## Code scaffolding
+## Setup/Installation Requirements
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+  - Clone this repository from https://github.com/hyewon92cho/puff-chat-client.git
+  - Clone the server repository from https://github.com/hyewon92cho/puff-chat-server.git
+  - Navigate to the "puff-chat-client" folder in your terminal and type "npm install" to install necessary plugins.
+  - Navigate to the "puff-chat-server" folder in your terminal and also type "npm install" to install necessary plugins.
+  
+  - Create a file in the app folder of the "puff-chat-client" called 'api-keys.ts'.
+    * Inside the api-keys.ts file, type in 'export const masterFirebaseConfig = {}'
+    * Inside the curly braces, paste what you were sent in the email about API keys.
 
-## Build
+  - In the "puff-chat-server" folder, create a "credentials" folder. Inside this folder, create the a file with the name you received in the email about API keys and inside copy paste the information in the same email.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+  - Type in "ng serve -o" to start the app in your Chrome browswer.
 
-## Running unit tests
+## Support and contact details
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+  - Hyewon Cho - github.com/Hyewon92Cho
+  - Chan Lee - github.com/goenchan
+  - Victoria Oh - github.com/VicOhPNW
+  - Hyung Lee - github.com/HyungNLee
 
-## Running end-to-end tests
+## Technologies Used
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+  - Node.js
+  - Angular 7
+  - Typescript
+  - CSS
+  - HTML
+  - Firebase Realtime Database
+  - Firebase Authentication
+  - ExpressJS
+  - Socket.io
+  
+This software is licensed under the MIT license.
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Copyright (c) 2018 **Hyewon Cho, Chan Lee, Victoria Oh, Hyung Lee**
