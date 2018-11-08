@@ -111,6 +111,7 @@ export class ChatComponent implements OnInit {
 
   sendImg(url) {
     this.sendMsg(url+"THIS_IS_IMAGE");
+    document.getElementById("img-dropdown-content").classList.toggle("hide");
   }
 
   preventDefault () {window.addEventListener('beforeunload', function (e) {
@@ -161,8 +162,12 @@ export class ChatComponent implements OnInit {
     document.getElementById("dropdown-content").classList.toggle("emoji-grid");
   }
 
+  imgInputShow() {
+    document.getElementById("img-dropdown-content").classList.toggle("hide");
+  }
+
   sendEmoji(emojiSrc) {
-    this.sendImg(emojiSrc);
+    this.sendMsg(emojiSrc+"THIS_IS_IMAGE");
     this.emojiMenuShow();
   }
 }

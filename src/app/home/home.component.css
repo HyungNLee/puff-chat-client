@@ -1,12 +1,15 @@
 main.mdl-layout__content{
-    /* width: 30%; */
+    width: 900px;
+    margin-left: 26%;
+    margin-right: 26%;
     overflow-x: visible;
     overflow-y: visible;
 }
 
 .main-logo{
+    margin-left: -28%;
     color: white;
-    text-align: center;
+    text-align: left;
 }
   .demo-layout-transparent .mdl-layout__header,
   .demo-layout-transparent .mdl-layout__drawer-button {

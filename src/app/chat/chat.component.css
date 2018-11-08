@@ -256,7 +256,7 @@
     display: inline-block;
 }
 
-#dropdown-content {
+#dropdown-content{
   padding: 10px 10px;
   position: absolute;
   background-color: #f9f9f9;
@@ -266,6 +266,18 @@
   right: 0;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
+}
+
+#img-dropdown-content {
+  width: 40%;
+  height: auto;
+  padding: 15px 15px;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 5;
+  bottom: 40px;
+  right: 0;
 }
 
 .hide {
@@ -306,4 +318,17 @@
 
 #user-name{
   margin-top: 6px;
+}
+
+.img-button{
+  bottom: -6px;
+  left: 20px;
+}
+
+.img-src-input {
+  margin-top: 15px;
+}
+
+#img-dropdown-content img{
+  margin-left: 100%;
 }
