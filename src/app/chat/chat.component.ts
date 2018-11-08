@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { ChatService } from '../chat.service';
 import { User } from '../models/user.model';
 import { AuthenticationService } from '../authentication.service';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./chat.component.css'],
   providers : [ChatService, AuthenticationService]
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, DoCheck {
   messages=[{username: "Ethan Lee", msg: "Hello, welcome to the chatroom", timestamp: Date.now()}];
   msg : string;
   // currentUser: User;
@@ -65,6 +65,7 @@ export class ChatComponent implements OnInit {
   }
 
   logout() {
+    this.chatService.logout(this.selectedChatroom, this.userName);
     this.authService.logout();
     if (confirm('Successfully logged out')) {
       this.router.navigate([""]);
