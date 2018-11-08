@@ -149,7 +149,8 @@ export class ChatComponent implements OnInit, DoCheck {
     })
   }
 
-  changeChatroom() {
+  changeChatroom(chatroomId) {
+    this.selectedChatroom = chatroomId;
     this.getMessageSub.unsubscribe();
     this.getPreviousMessagesSub.unsubscribe();
     this.getChatroomListSub.unsubscribe();
@@ -178,6 +179,7 @@ export class ChatComponent implements OnInit, DoCheck {
     this.getChatroomListSub = this.chatService
       .getChatroomsList()
       .subscribe(list => {
+        this.chatroomList = [];
         this.chatroomList = list;
       });
   }

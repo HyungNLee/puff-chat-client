@@ -48,12 +48,9 @@
 <!-- Drawer is here -->
 
 <div class="mdl-layout__drawer">
-  <span class="mdl-layout-title">Title</span>
+  <span class="mdl-layout-title">Chatrooms</span>
   <nav class="mdl-navigation">
-    <a class="mdl-navigation__link" href="">Link</a>
-    <a class="mdl-navigation__link" href="">Link</a>
-    <a class="mdl-navigation__link" href="">Link</a>
-    <a class="mdl-navigation__link" href="">Link</a>
+    <div (click)="changeChatroom(chatroom.id)" *ngFor="let chatroom of chatroomList" class="mdl-navigation__link">{{ chatroom.title }}</div>
   </nav>
 </div>
 
@@ -166,9 +163,9 @@
   </div>
 </main>
 
-<div>
+<!-- <div>
   <select [(ngModel)]="selectedChatroom" (ngModelChange)="changeChatroom()" name="selectedChatroom">
     <option *ngFor="let chatroom of chatroomList" [value]="chatroom.id">{{chatroom.title}}</option>
   </select>
-</div>
+</div> -->
 <!-- </div> -->
