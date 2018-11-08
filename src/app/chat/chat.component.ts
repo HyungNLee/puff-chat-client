@@ -17,6 +17,7 @@ export class ChatComponent implements OnInit, DoCheck {
   // currentUser: User;
   user;
   userName: string;
+  userId: string;
   regex = /(THIS_IS_IMAGE)/i;
   chatroomList: object[] = [];
   selectedChatroom: string = "chatroom-0";
@@ -48,6 +49,7 @@ export class ChatComponent implements OnInit, DoCheck {
         this.router.navigate(['']);
       } else {
         this.userName = user.displayName;
+        this.userId = user.uid;
       }
     });
   }
@@ -59,6 +61,7 @@ export class ChatComponent implements OnInit, DoCheck {
     } else {
       if (this.user.displayName) {
         this.userName = this.user.displayName;
+        this.userId = this.user.uid;
         this.chatService.checkin(this.selectedChatroom, this.userName, this.user.uid);
       } else {
         this.userName = "Anonymous Puffster";
@@ -103,7 +106,7 @@ export class ChatComponent implements OnInit, DoCheck {
       .getMessage()
       .subscribe(msg => {
         if (msg.selectedChatroom === this.selectedChatroom) {
-          this.messages.push({ username: msg.username, msg: msg.msg, timestamp: msg.timestamp, uid: (msg.uid === undefined) ? "default":msg.uid });
+          this.messages.push({ username: msg.username, msg: msg.msg, timestamp: msg.timestamp, uid: (msg.uid === undefined) ? this.user.uid :msg.uid });
         }
         
         setTimeout(() => {
