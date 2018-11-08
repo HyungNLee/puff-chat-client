@@ -1,4 +1,4 @@
-<div class="mdl-layout mdl-js-layout">
+<div class="mdl-js-layout height-fix">
 <!-- Header section containing logo -->
 <header class="mdl-layout__header mdl-color-text--white mdl-color--indigo-pink-700">
   <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
@@ -86,21 +86,22 @@
           </div>
         </div>
 
-        <form id="message-form" onkeypress="return event.keyCode != 13;" action="#">
+        <div class="input-row mdl-grid">
+          <div class="mdl-cell--5-col">
+        <form class="mdl-cell" id="message-form" onkeypress="return event.keyCode != 13;" action="#">
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input (keydown.enter)="sendMsg(msgInput.value); msgInput.value =''" class="mdl-textfield__input" type="text"
               id="message" #msgInput name="" value="" placeholder="Message..." required>
           </div>
-          `
 
           <!-- Here comes the buttons -->
           <a type="click" (click)="sendMsg(msgInput.value); msgInput.value='';" class="mdl-button mdl-js-button mdl-button--raised  mdl-button--colored mdl-js-ripple-effect">
             Send
           </a>
         </form>
-
+      </div>
         <!-- Emoji Menu -->
-        <div class="dropdown">
+        <div class="dropdown mdl-cell--2-col">
           <a><img class="emoji-button" src="../../assets/emoji/PuffChat Smiley.png" (click)="emojiMenuShow()" alt="emoji button"></a>
           <div id="dropdown-content" class="hide">
             <div class="emoji-select-container" *ngFor="let emoji of emojiIconList">
@@ -119,6 +120,7 @@
           </a>
         </form> -->
 
+        <div class="mdl-cell--2-col">
         <form id="image-form">
           <a type="click" id="submitImage" title="Add an image" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--amber-400 mdl-color-text--white">
             <i class="material-icons" (click)="imgInputShow()">image</i>
@@ -126,12 +128,13 @@
         </form>
 
 
-        <div id="img-dropdown-content" class="hide">
-          <div class="mdl-grid">
+        <div id="img-dropdown-content " class="hide">
+          <div class="mdl-grid mdl-cell mdl-cell--2-col">
           <div class="mdl-cell--9-col">
             <input [(ngModel)]=imgInputModel #imgInputField (keydown.enter)="sendImg(imgInput.value); imgInputModel=''"
               class="form-control img-src-input mdl-textfield__input" type="text" id="img" placeholder="Enter URL...">
           </div>
+        </div>
 
           <div class="mdl-cell--2-col">
             <a type="click" (click)="sendImg(imgInputModel); imgInputModel='';" class="img-button mdl-button mdl-js-button mdl-button--raised  mdl-button--colored mdl-js-ripple-effect">
@@ -146,6 +149,7 @@
               </div>
             </div>
         </div>
+      </div>
 
 
 

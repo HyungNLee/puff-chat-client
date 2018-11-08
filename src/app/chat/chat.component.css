@@ -355,3 +355,12 @@ div.mdl-layout__drawer-button {
   height: 65px;
   width: 65px;
 }
+
+.height-fix {
+  height: 85vh;
+}
+
+div.input-row {
+  position: absolute;
+  bottom: 0;
+}
