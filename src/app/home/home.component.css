@@ -53,3 +53,33 @@ main.mdl-layout__content{
     justify-content:flex-end;
     right: 2%;
 }
+
+.welcome-info {
+  border: 1px solid white;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 5px 7px rgba(230,212,230,1);
+  -moz-box-shadow: 0px 0px 5px 7px rgba(230,212,230,1);
+  box-shadow: 0px 0px 5px 7px rgba(230,212,230,1);
+  margin: 0 auto;
+  width: 50%;
+  text-align: center;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+}
+
+#welcome-info-textbox {
+  margin: 0 auto;
+  width: 75%;
+  border: 2px double whitesmoke;
+  color: white;
+  border-radius: 5px;
+}
+
+.welcome-info h2 {
+  color: white;
+}
+
+.welcome-info button {
+  color: white;
+  margin: 15px;
+}
+
