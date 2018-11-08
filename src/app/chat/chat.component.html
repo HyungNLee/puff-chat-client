@@ -1,4 +1,4 @@
-<div class="mdl-layout mdl-js-layout">
+<!-- <div class="mdl-js-layout"> -->
 <!-- Header section containing logo -->
 <header class="mdl-layout__header mdl-color-text--white mdl-color--indigo-pink-700">
   <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
@@ -46,6 +46,7 @@
   </div>
 </header>
 <!-- Drawer is here -->
+
 <div class="mdl-layout__drawer">
   <span class="mdl-layout-title">Title</span>
   <nav class="mdl-navigation">
@@ -55,6 +56,7 @@
     <a class="mdl-navigation__link" href="">Link</a>
   </nav>
 </div>
+
 
 <main *ngIf="user" class="mdl-layout__content mdl-color--grey-100">
   <div id="messages-card-container" class="mdl-cell mdl-cell--12-col mdl-grid">
@@ -164,4 +166,4 @@
     <option *ngFor="let chatroom of chatroomList" [value]="chatroom.id">{{chatroom.title}}</option>
   </select>
 </div>
-</div>
+<!-- </div> -->
