@@ -1,5 +1,7 @@
+.demo-layout-transparent.mdl-color--primary.mdl-layout.mdl-js-layout{
+    height:100%;
+}
 main.mdl-layout__content{
-    /* width: 30%; */
     overflow-x: visible;
     overflow-y: visible;
 }
@@ -41,7 +43,3 @@ footer.mdl-mini-footer {
 	padding: 24px;
 	flex: none;
 } */
-
-.gif-container {
-  margin-top: 150px;
-}

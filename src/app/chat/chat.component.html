@@ -7,10 +7,7 @@
 
     <div id="user-container">
       <div class="mdl-grid float-right user-container__nav" *ngIf="user">
-        <!-- <div id="user-name">Hi, {{currentUser.userName}}</div>
-          <button id="sign-out" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
-            Sign-out
-          </button> -->
+        
         <div class="mdl-cell--4-col" id="user-name">
           <p>Hello, {{userName}}</p>
         </div>
@@ -18,22 +15,23 @@
           <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white" (click)="logout()">Log out</a>
         </div>
 
-        
-        <div class="mdl-cell--4-col" >
+
+        <div class="mdl-cell--4-col">
           <div *ngIf="!isEditExpanded">
-        <a class="mdl-button mdl-js-button mdl-js-ripple-effect button mdl-button--accent mdl-color-text--white" (click)="isEditExpanded=!isEditExpanded">Update Name</a>
-        </div>
+            <a class="mdl-button mdl-js-button mdl-js-ripple-effect button mdl-button--accent mdl-color-text--white"
+              (click)="isEditExpanded=!isEditExpanded">Update Name</a>
+          </div>
 
           <div *ngIf="isEditExpanded">
             <input #newDisplayName required type="text" placeholder="New Name">
 
             <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white" (click)="updateDisplayName(newDisplayName.value);isEditExpanded=!isEditExpanded">Update
-                Name</a>
+              Name</a>
           </div>
-          </div>
-  
+        </div>
 
-        
+
+
 
 
       </div>
@@ -121,12 +119,41 @@
           </div>
         </div>
 
-        <form id="image-form" action="#">
+        <!-- <form id="image-form" action="#">
           <a (click)="sendImg(msgInput.value); msgInput.value ='' " type="click" id="submitImage" title="Add an image"
             class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--amber-400 mdl-color-text--white">
             <i class="material-icons">image</i>
           </a>
+        </form> -->
+
+        <form id="image-form">
+          <a type="click" id="submitImage" title="Add an image" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--amber-400 mdl-color-text--white">
+            <i class="material-icons" (click)="imgInputShow()">image</i>
+          </a>
         </form>
+
+
+        <div id="img-dropdown-content" class="hide">
+          <div class="mdl-grid">
+          <div class="mdl-cell--9-col">
+            <input [(ngModel)]=imgInputModel #imgInputField (keydown.enter)="sendImg(imgInput.value); imgInputModel=''"
+              class="form-control img-src-input mdl-textfield__input" type="text" id="img" placeholder="Enter URL...">
+          </div>
+
+          <div class="mdl-cell--2-col">
+            <a type="click" (click)="sendImg(imgInputModel); imgInputModel='';" class="img-button mdl-button mdl-js-button mdl-button--raised  mdl-button--colored mdl-js-ripple-effect">
+              Send
+            </a>
+          </div>
+        </div>
+          <div class="mdl-grid">
+            <div ></div>
+              <div [hidden]="imgInputModel==null" class="img-preview">
+                <img [src]="imgInputModel">
+              </div>
+            </div>
+        </div>
+
 
 
 

@@ -37,4 +37,12 @@ export class ChatService {
   escapeChatroom(selectedChatroom, checkoutUsername, newName) {
     this.socket.emit("checkout", { selectedChatroom: selectedChatroom, checkoutUsername: checkoutUsername, checkinUsername: newName})
   }
+
+  logout(selectedChatroom, checkoutUsername) {
+    this.socket.emit("logout", { selectedChatroom: selectedChatroom, checkoutUsername: checkoutUsername});
+  }
+
+  checkin(selectedChatroom, checkinUsername) {
+    this.socket.emit("checkin", { selectedChatroom: selectedChatroom, checkinUsername: checkinUsername});    
+  }
 }

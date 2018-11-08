@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { ChatService } from '../chat.service';
 import { User } from '../models/user.model';
 import { AuthenticationService } from '../authentication.service';
@@ -11,9 +11,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./chat.component.css'],
   providers: [ChatService, AuthenticationService]
 })
-export class ChatComponent implements OnInit {
-  messages = [{ username: "Ethan Lee", msg: "Hello, welcome to the chatroom", timestamp: Date.now() }];
-  msg: string;
+export class ChatComponent implements OnInit, DoCheck {
+  messages=[{username: "Ethan Lee", msg: "Hello, welcome to the chatroom", timestamp: Date.now()}];
+  msg : string;
   // currentUser: User;
   user;
   userName: string;
@@ -65,6 +65,7 @@ export class ChatComponent implements OnInit {
   }
 
   logout() {
+    this.chatService.logout(this.selectedChatroom, this.userName);
     this.authService.logout();
     if (confirm('Successfully logged out')) {
       this.router.navigate([""]);
@@ -122,7 +123,8 @@ export class ChatComponent implements OnInit {
   }
 
   sendImg(url) {
-    this.sendMsg(url + "THIS_IS_IMAGE");
+    this.sendMsg(url+"THIS_IS_IMAGE");
+    document.getElementById("img-dropdown-content").classList.toggle("hide");
   }
 
   preventDefault() {
@@ -174,8 +176,12 @@ export class ChatComponent implements OnInit {
     document.getElementById("dropdown-content").classList.toggle("emoji-grid");
   }
 
+  imgInputShow() {
+    document.getElementById("img-dropdown-content").classList.toggle("hide");
+  }
+
   sendEmoji(emojiSrc) {
-    this.sendImg(emojiSrc);
+    this.sendMsg(emojiSrc+"THIS_IS_IMAGE");
     this.emojiMenuShow();
   }
 }
