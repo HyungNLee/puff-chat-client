@@ -1,4 +1,4 @@
-<!-- <div class="mdl-js-layout"> -->
+<div class="mdl-js-layout height-fix">
 <!-- Header section containing logo -->
 <header class="mdl-layout__header mdl-color-text--white mdl-color--indigo-pink-700">
   <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
@@ -88,21 +88,22 @@
           </div>
         </div>
 
-        <form id="message-form" onkeypress="return event.keyCode != 13;" action="#">
+        <div class="input-row mdl-grid">
+          <div class="mdl-cell--11-col">
+        <form class="mdl-cell" id="message-form" onkeypress="return event.keyCode != 13;" action="#">
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input (keydown.enter)="sendMsg(msgInput.value); msgInput.value =''" class="mdl-textfield__input" type="text"
               id="message" #msgInput name="" value="" placeholder="Message..." required>
           </div>
-          `
 
           <!-- Here comes the buttons -->
           <a type="click" (click)="sendMsg(msgInput.value); msgInput.value='';" class="mdl-button mdl-js-button mdl-button--raised  mdl-button--colored mdl-js-ripple-effect">
             Send
           </a>
         </form>
-
+      </div>
         <!-- Emoji Menu -->
-        <div class="dropdown">
+        <div class="dropdown mdl-cell--1-col">
           <a><img class="emoji-button" src="../../assets/emoji/PuffChat Smiley.png" (click)="emojiMenuShow()" alt="emoji button"></a>
           <div id="dropdown-content" class="hide">
             <div class="emoji-select-container" *ngFor="let emoji of emojiIconList">
@@ -112,7 +113,7 @@
               </div>
             </div>
           </div>
-        </div>
+
 
         <!-- <form id="image-form" action="#">
           <a (click)="sendImg(msgInput.value); msgInput.value ='' " type="click" id="submitImage" title="Add an image"
@@ -120,6 +121,7 @@
             <i class="material-icons">image</i>
           </a>
         </form> -->
+
 
         <form id="image-form">
           <a type="click" id="submitImage" title="Add an image" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--amber-400 mdl-color-text--white">
@@ -136,18 +138,21 @@
           </div>
 
           <div class="mdl-cell--2-col">
-            <a type="click" (click)="sendImg(imgInputModel); imgInputModel='';" class="img-button mdl-button mdl-js-button mdl-button--raised  mdl-button--colored mdl-js-ripple-effect">
-              Send
-            </a>
+              <a type="click" (click)="sendImg(imgInputModel); imgInputModel='';" class="img-button mdl-button mdl-js-button mdl-button--raised  mdl-button--colored mdl-js-ripple-effect">
+                Send
+              </a>
           </div>
-        </div>
           <div class="mdl-grid">
-            <div ></div>
               <div [hidden]="imgInputModel==null" class="img-preview">
                 <img [src]="imgInputModel">
               </div>
             </div>
         </div>
+
+        </div>
+
+        </div>
+      </div>
 
 
 

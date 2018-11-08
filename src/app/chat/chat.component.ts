@@ -13,8 +13,8 @@ import { AnonymousSubject } from 'rxjs-compat';
   providers: [ChatService, AuthenticationService]
 })
 export class ChatComponent implements OnInit, DoCheck {
-  messages=[{username: "Ethan Lee", msg: "Hello, welcome to the chatroom", timestamp: Date.now()}];
-  msg : string;
+  messages = [{ username: "Ethan Lee", msg: "Hello, welcome to the chatroom", timestamp: Date.now() }];
+  msg: string;
   // currentUser: User;
   user;
   userName: string;
@@ -24,7 +24,7 @@ export class ChatComponent implements OnInit, DoCheck {
   getMessageSub: any;
   getPreviousMessagesSub: any;
   getChatroomListSub: any;
-  
+
 
   emojiIconList: any[] = [
     { src: '../../assets/emoji/PuffChat Smiley.png', name: 'Smiley' },
@@ -58,7 +58,7 @@ export class ChatComponent implements OnInit, DoCheck {
     if (this.user == null) {
 
     } else {
-      if(this.user.displayName){
+      if (this.user.displayName) {
         this.userName = this.user.displayName;
       } else {
         this.userName = "Anonymous Puffster";
@@ -100,6 +100,10 @@ export class ChatComponent implements OnInit, DoCheck {
         if (msg.selectedChatroom === this.selectedChatroom) {
           this.messages.push({ username: msg.username, msg: msg.msg, timestamp: msg.timestamp });
         }
+        
+        setTimeout(() => {
+          this.scrollToBottom();
+        }, 100);
       });
 
     this.chatService.requestPreviousMessages(this.selectedChatroom);
@@ -129,7 +133,7 @@ export class ChatComponent implements OnInit, DoCheck {
   }
 
   sendImg(url) {
-    this.sendMsg(url+"THIS_IS_IMAGE");
+    this.sendMsg(url + "THIS_IS_IMAGE");
     document.getElementById("img-dropdown-content").classList.toggle("hide");
   }
 
@@ -187,7 +191,12 @@ export class ChatComponent implements OnInit, DoCheck {
   }
 
   sendEmoji(emojiSrc) {
-    this.sendMsg(emojiSrc+"THIS_IS_IMAGE");
+    this.sendMsg(emojiSrc + "THIS_IS_IMAGE");
     this.emojiMenuShow();
+  }
+
+  scrollToBottom() {
+    let messageBox: Element = document.getElementById('messages');
+    messageBox.scrollTop = messageBox.scrollHeight;
   }
 }
