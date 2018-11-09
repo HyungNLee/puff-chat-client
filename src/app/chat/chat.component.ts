@@ -17,8 +17,9 @@ export class ChatComponent implements OnInit, DoCheck {
   // currentUser: User;
   user;
   userName: string;
+  userId: string;
   regex = /(THIS_IS_IMAGE)/i;
-  chatroomList: object[] = [];
+  chatroomList: any[] = [];
   selectedChatroom: string = "chatroom-0";
   getMessageSub: any;
   getPreviousMessagesSub: any;
@@ -48,6 +49,7 @@ export class ChatComponent implements OnInit, DoCheck {
         this.router.navigate(['']);
       } else {
         this.userName = user.displayName;
+        this.userId = user.uid;
       }
     });
   }
@@ -59,6 +61,7 @@ export class ChatComponent implements OnInit, DoCheck {
     } else {
       if (this.user.displayName) {
         this.userName = this.user.displayName;
+        this.userId = this.user.uid;
         this.chatService.checkin(this.selectedChatroom, this.userName, this.user.uid);
       } else {
         this.userName = "Anonymous Puffster";
@@ -103,7 +106,7 @@ export class ChatComponent implements OnInit, DoCheck {
       .getMessage()
       .subscribe(msg => {
         if (msg.selectedChatroom === this.selectedChatroom) {
-          this.messages.push({ username: msg.username, msg: msg.msg, timestamp: msg.timestamp, uid: (msg.uid === undefined) ? "default":msg.uid });
+          this.messages.push({ username: msg.username, msg: msg.msg, timestamp: msg.timestamp, uid: (msg.uid === undefined) ? this.user.uid :msg.uid });
         }
         
         setTimeout(() => {
@@ -122,11 +125,17 @@ export class ChatComponent implements OnInit, DoCheck {
         });
       });
 
-    this.getChatroomListSub = this.chatService
-      .getChatroomsList()
-      .subscribe(list => {
-        this.chatroomList = list;
+    this.getChatroomListSub = this.chatService.getChatroomsList().subscribe(list => {
+      this.chatroomList = list;
+      this.chatroomList.forEach(chatroom => {
+        this.chatService.getMemberCountRequest(chatroom.id);
       });
+      this.chatService.getMemberCount().subscribe(msg => {
+        this.chatroomList.find(function(chatroom) {
+          return (chatroom.id === msg.chatroomId);
+        }).memberCount = msg.memberCount;
+      });
+    });
   }
 
   sendMsg(msg) {
@@ -149,7 +158,12 @@ export class ChatComponent implements OnInit, DoCheck {
     })
   }
 
-  changeChatroom() {
+  changeChatroom(chatroomId) {
+    this.chatroomList.forEach(chatroom => {
+      this.chatService.getMemberCountRequest(chatroom.id);
+    });
+    
+    this.selectedChatroom = chatroomId;
     this.getMessageSub.unsubscribe();
     this.getPreviousMessagesSub.unsubscribe();
     this.getChatroomListSub.unsubscribe();
@@ -178,6 +192,7 @@ export class ChatComponent implements OnInit, DoCheck {
     this.getChatroomListSub = this.chatService
       .getChatroomsList()
       .subscribe(list => {
+        this.chatroomList = [];
         this.chatroomList = list;
       });
   }
