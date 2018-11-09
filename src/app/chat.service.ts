@@ -7,8 +7,8 @@ export class ChatService {
 
   constructor(private socket: Socket) { }
 
-  sendMessage(userName: string, msg: string, selectedChatroom: string){
-    this.socket.emit("message", {username: userName, msg: msg, selectedChatroom: selectedChatroom});
+  sendMessage(userName: string, msg: string, selectedChatroom: string, uid: string){
+    this.socket.emit("message", {username: userName, msg: msg, selectedChatroom: selectedChatroom, uid: uid});
   }
   
   getMessage() {
@@ -34,15 +34,23 @@ export class ChatService {
     return this.socket.fromEvent<any>("chatroomsList");
   }
 
-  escapeChatroom(selectedChatroom, checkoutUsername, newName) {
-    this.socket.emit("checkout", { selectedChatroom: selectedChatroom, checkoutUsername: checkoutUsername, checkinUsername: newName})
+  updateUsername(selectedChatroom, userUID, previousName, newName) {
+    this.socket.emit("updateUsername", { selectedChatroom: selectedChatroom, userUID: userUID, previousUsername: previousName, newUsername: newName})
   }
 
-  logout(selectedChatroom, checkoutUsername) {
-    this.socket.emit("logout", { selectedChatroom: selectedChatroom, checkoutUsername: checkoutUsername});
+  // logout(selectedChatroom, checkoutUsername) {
+  //   this.socket.emit("logout", { selectedChatroom: selectedChatroom, checkoutUsername: checkoutUsername});
+  // }
+
+  checkin(selectedChatroom, checkinUsername, checkinUID) {
+    this.socket.emit("checkin", { selectedChatroom: selectedChatroom, checkinUsername: checkinUsername, checkinUID: checkinUID });    
   }
 
-  checkin(selectedChatroom, checkinUsername) {
-    this.socket.emit("checkin", { selectedChatroom: selectedChatroom, checkinUsername: checkinUsername});    
+  getMemberCountRequest(chatroomId) {
+    this.socket.emit("getMemberCount", chatroomId);
+  }
+
+  getMemberCount() {
+    return this.socket.fromEvent<any>("getMemberCount");
   }
 }

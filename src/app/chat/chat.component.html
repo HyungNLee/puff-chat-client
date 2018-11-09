@@ -46,15 +46,17 @@
   </div>
 </header>
 <!-- Drawer is here -->
+
 <div class="mdl-layout__drawer">
-  <span class="mdl-layout-title">Title</span>
+  <span class="mdl-layout-title">Chatrooms</span>
   <nav class="mdl-navigation">
-    <a class="mdl-navigation__link" href="">Link</a>
-    <a class="mdl-navigation__link" href="">Link</a>
-    <a class="mdl-navigation__link" href="">Link</a>
-    <a class="mdl-navigation__link" href="">Link</a>
+    <div (click)="changeChatroom(chatroom.id)" *ngFor="let chatroom of chatroomList" class="mdl-navigation__link" [class.active]="selectedChatroom === chatroom.id">{{ chatroom.title }}
+        <!-- Number badge -->
+      <span class="badge-element" style="color: white; background-color: pink;">{{ chatroom.memberCount }} </span>
+    </div>
   </nav>
 </div>
+
 
 <main *ngIf="user" class="mdl-layout__content mdl-color--grey-100">
   <div id="messages-card-container" class="mdl-cell mdl-cell--12-col mdl-grid">
@@ -66,15 +68,15 @@
           <!-- Ngfor loop will be located here -->
           <div *ngFor="let message of messages" id="message-filler">
 
-            <div *ngIf="message.username != userName" class="initial-box">
+            <div *ngIf="message.uid != userId" class="initial-box">
               <h3>{{message.username[0].toUpperCase()}}</h3>
             </div>
 
 
-            <span [class.float-right]="message.username == userName">({{message.username}}, {{ message.timestamp
+            <span [class.float-right]="message.uid == userId">({{message.username}}, {{ message.timestamp
               |date:'medium' }})</span><br />
 
-            <div [class.me]="message.username != userName" [class.mdl-cell--3-offset]="message.username == userName"
+            <div [class.me]="message.uid != userId" [class.mdl-cell--3-offset]="message.uid == userId"
               class="chat-bubble">
               <div *ngIf="regex.test(message.msg); else textMessage">
                 <img class="img__element" [src]="message.msg.replace('THIS_IS_IMAGE', '')">
@@ -87,7 +89,7 @@
         </div>
 
         <div class="input-row mdl-grid">
-          <div class="mdl-cell--5-col">
+          <div class="mdl-cell--11-col">
         <form class="mdl-cell" id="message-form" onkeypress="return event.keyCode != 13;" action="#">
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input (keydown.enter)="sendMsg(msgInput.value); msgInput.value =''" class="mdl-textfield__input" type="text"
@@ -101,7 +103,7 @@
         </form>
       </div>
         <!-- Emoji Menu -->
-        <div class="dropdown mdl-cell--2-col">
+        <div class="dropdown mdl-cell--1-col">
           <a><img class="emoji-button" src="../../assets/emoji/PuffChat Smiley.png" (click)="emojiMenuShow()" alt="emoji button"></a>
           <div id="dropdown-content" class="hide">
             <div class="emoji-select-container" *ngFor="let emoji of emojiIconList">
@@ -111,7 +113,7 @@
               </div>
             </div>
           </div>
-        </div>
+
 
         <!-- <form id="image-form" action="#">
           <a (click)="sendImg(msgInput.value); msgInput.value ='' " type="click" id="submitImage" title="Add an image"
@@ -120,7 +122,7 @@
           </a>
         </form> -->
 
-        <div class="mdl-cell--2-col">
+
         <form id="image-form">
           <a type="click" id="submitImage" title="Add an image" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--amber-400 mdl-color-text--white">
             <i class="material-icons" (click)="imgInputShow()">image</i>
@@ -128,26 +130,27 @@
         </form>
 
 
-        <div id="img-dropdown-content " class="hide">
-          <div class="mdl-grid mdl-cell mdl-cell--2-col">
+        <div id="img-dropdown-content" class="hide">
+          <div class="mdl-grid">
           <div class="mdl-cell--9-col">
             <input [(ngModel)]=imgInputModel #imgInputField (keydown.enter)="sendImg(imgInput.value); imgInputModel=''"
               class="form-control img-src-input mdl-textfield__input" type="text" id="img" placeholder="Enter URL...">
           </div>
-        </div>
 
           <div class="mdl-cell--2-col">
-            <a type="click" (click)="sendImg(imgInputModel); imgInputModel='';" class="img-button mdl-button mdl-js-button mdl-button--raised  mdl-button--colored mdl-js-ripple-effect">
-              Send
-            </a>
+              <a type="click" (click)="sendImg(imgInputModel); imgInputModel='';" class="img-button mdl-button mdl-js-button mdl-button--raised  mdl-button--colored mdl-js-ripple-effect">
+                Send
+              </a>
           </div>
-        </div>
           <div class="mdl-grid">
-            <div ></div>
               <div [hidden]="imgInputModel==null" class="img-preview">
                 <img [src]="imgInputModel">
               </div>
             </div>
+        </div>
+
+        </div>
+
         </div>
       </div>
 
@@ -163,9 +166,9 @@
   </div>
 </main>
 
-<div>
+<!-- <div>
   <select [(ngModel)]="selectedChatroom" (ngModelChange)="changeChatroom()" name="selectedChatroom">
     <option *ngFor="let chatroom of chatroomList" [value]="chatroom.id">{{chatroom.title}}</option>
   </select>
-</div>
-</div>
+</div> -->
+<!-- </div> -->
